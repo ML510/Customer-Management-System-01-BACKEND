@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -29,7 +30,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<Customer> getAll() {
         List<CustomerEntity> all = repository.findAll();
-        ArrayList<Customer> customerList = new ArrayList<>();
+        List<Customer> customerList = new ArrayList<>();
 
         all.forEach(customerEntity -> {
             customerList.add(mapper.map(customerEntity,Customer.class));
@@ -46,4 +47,23 @@ public class CustomerServiceImpl implements CustomerService {
     public void updateCustomer(Customer customer) {
         repository.save(mapper.map(customer, CustomerEntity.class));
     }
+
+    @Override
+    public Customer searchCustomer(Integer id) {
+        return mapper.map(repository.findById(id), Customer.class);
+
+    }
+
+    @Override
+    public List<Customer> searchByName(String name) {
+        List<CustomerEntity> byName = repository.findByName(name);
+        ArrayList<Customer> customerList = new ArrayList<>();
+
+        byName.forEach(customerEntity -> {
+            customerList.add(mapper.map(customerEntity, Customer.class));
+        });
+        return customerList;
+    }
+
+
 }
