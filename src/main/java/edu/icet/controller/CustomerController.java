@@ -48,7 +48,10 @@ public class CustomerController {
     @GetMapping("/search-by-address/{address}")
     public List<Customer> searchByAddress(@PathVariable String address){
         return service.searchByAddress(address);
-
     }
 
+    @GetMapping("/search-by-salary/{salary}")
+    public List<Customer> searchBySalary(@PathVariable Double salary){
+        return service.searchBySalary(salary);
+    }
 }
