@@ -3,10 +3,9 @@ package edu.icet.controller;
 import edu.icet.dto.Customer;
 import edu.icet.service.custom.CustomerService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/customer")
@@ -19,5 +18,22 @@ public class CustomerController {
     public void addCustomer(@RequestBody Customer customer){
         service.addCustomer(customer);
     }
+
+    @GetMapping("/get-all")
+    public List<Customer> getAll(){
+        return service.getAll();
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteCustomer(@PathVariable Integer id){
+        service.deleteCustomer(id);
+    }
+
+    @PutMapping("/update-customer")
+    public void updateCustomer(@RequestBody Customer customer){
+        service.updateCustomer(customer);
+    }
+
+
 
 }
