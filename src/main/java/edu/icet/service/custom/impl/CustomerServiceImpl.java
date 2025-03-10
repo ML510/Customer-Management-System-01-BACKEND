@@ -65,5 +65,16 @@ public class CustomerServiceImpl implements CustomerService {
         return customerList;
     }
 
+    @Override
+    public List<Customer> searchByAddress(String address) {
+        List<CustomerEntity> byAddress = repository.findByAddress(address);
+        ArrayList<Customer> customerList = new ArrayList<>();
+
+        byAddress.forEach(customerEntity -> {
+            customerList.add(mapper.map(customerEntity, Customer.class));
+        });
+        return customerList;
+    }
+
 
 }

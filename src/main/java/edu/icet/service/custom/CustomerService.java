@@ -17,4 +17,6 @@ public interface CustomerService {
     Customer searchCustomer(Integer id);
 
     List<Customer> searchByName(String name);
+
+    List<Customer> searchByAddress(String address);
 }
